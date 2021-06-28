@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/space_delivery_navigation"
+    app:startDestination="@id/spaceStations">
+    <fragment
+        android:id="@+id/spaceStations"
+        android:name="com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.view.SpaceStations"
+        android:label="SpaceStations">
+        <action
+            android:id="@+id/action_spaceStations_to_favoriteStations"
+            app:destination="@id/favoriteStations" />
+        <argument
+            android:name="fromFragment"
+            app:argType="boolean" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteStations"
+        android:name="com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.view.FavoriteStations"
+        android:label="FavoriteStations" >
+        <action
+            android:id="@+id/action_favoriteStations_to_spaceStations"
+            app:destination="@id/spaceStations" />
+    </fragment>
+</navigation>

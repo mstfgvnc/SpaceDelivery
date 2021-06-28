@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="station"
+            type="com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.model.StationModel" />
+        <variable
+            name="listener"
+            type="com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.adapter.StationClickListener" />
+    </data>
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:onClick="@{listener::onStationClicked}"
+    android:orientation="vertical"
+    android:padding="10dp">
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="3">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/capasity_stock"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="2000/1000">
+
+                        </TextView>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="242EUS"
+                            android:id="@+id/now_eus"
+                            >
+
+                        </TextView>
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@{station.name}"
+                    android:id="@+id/spaceship_name"
+                    >
+
+                </TextView>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="15dp"
+                    android:background="@null"
+                    android:src="@drawable/favorite_in"
+                    android:id="@+id/favorite_in_button"
+                    android:visibility="gone"
+                    >
+                </ImageButton>
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="15dp"
+                    android:background="@null"
+                    android:src="@drawable/favorite_out"
+                    android:id="@+id/favorite_out_button">
+                </ImageButton>
+            </RelativeLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2">
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_centerInParent="true"
+            android:text="TRAVEL"
+            android:id="@+id/travel_button">
+
+        </Button>
+
+    </RelativeLayout>
+
+</LinearLayout>
+
+</layout>
