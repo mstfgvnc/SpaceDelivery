@@ -13,12 +13,16 @@
             android:layout_height="wrap_content"
             android:text="FAVORİ İSTAYONLAR"
             android:gravity="center"
-            android:padding="15dp"/>
+            android:padding="15dp"
+            android:background="@drawable/custom_border"
+            android:textStyle="bold"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/favoriteList">
+            android:id="@+id/favoriteList"
+            android:background="@drawable/custom_border">
 
         </androidx.recyclerview.widget.RecyclerView>
 

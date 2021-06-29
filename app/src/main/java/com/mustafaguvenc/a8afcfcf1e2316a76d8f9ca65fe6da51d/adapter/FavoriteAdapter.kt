@@ -1,16 +1,13 @@
 package com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.R
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.databinding.ItemFavoriteListBinding
-import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.databinding.ItemStationListBinding
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.model.StationModel
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.util.CustomSharedPreferences
-import kotlinx.android.synthetic.main.item_favorite_list.view.*
 import java.text.DecimalFormat
 
 class FavoriteAdapter(val favoriteList : ArrayList<StationModel>):
@@ -41,8 +38,8 @@ class FavoriteAdapter(val favoriteList : ArrayList<StationModel>):
 
 
         holder.view.stationFv = favoriteList[position]
-        holder.view.eusForFavorite.text= DecimalFormat("##.##").format(distanceCalculate(favoriteList[position].coordinateX!!,favoriteList[position].coordinateY!!)).toString()
-
+        holder.view.eusForFavorite.text="Uzaklık: "+"\n" +DecimalFormat("##.##").format(distanceCalculate(favoriteList[position].coordinateX!!,favoriteList[position].coordinateY!!)).toString()+" EUS"
+        holder.view.capasityForFavorite.text="Kapasite: "+"\n" +favoriteList[position].capacity.toString()
         holder.view.favoriteInButtonFv.setOnClickListener {
             val favoriteHashSetStaion = customPreferences.getFavoritePosition()
             favoriteHashSetStaion.remove(mapRealPosition[position])

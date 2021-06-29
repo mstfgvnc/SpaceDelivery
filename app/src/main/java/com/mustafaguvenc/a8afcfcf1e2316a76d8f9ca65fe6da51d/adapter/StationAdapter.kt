@@ -1,9 +1,8 @@
 package com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.adapter
 
 
-import android.app.Application
+
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +17,6 @@ import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.R
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.databinding.ItemStationListBinding
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.model.StationModel
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.util.CustomSharedPreferences
-import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.view.MainActivity
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.view.SpaceStationsDirections
 import java.text.DecimalFormat
 import java.util.*
@@ -85,20 +83,20 @@ class StationAdapter(val stationList : ArrayList<StationModel>):RecyclerView.Ada
 
         }
 
-        holder.view.nowEus.text=DecimalFormat("##.##").format(eusSpaceship).toString()+"EUS"
-        holder.view.capasityStock.text=stationFilterList[position].capacity.toString()+"/"+stationFilterList[position].stock.toString()
+        holder.view.nowEus.text="Uzaklık: "+DecimalFormat("##.##").format(eusSpaceship).toString()+"EUS"
+        holder.view.capasityStock.text="Kapasite: "+stationFilterList[position].capacity.toString()+"\n"+"Stok: "+stationFilterList[position].stock.toString()
         if(customPreferences.getVisitedPosition().contains(realPosition)){
 
             holder.view.travelButton.setTextColor(Color.WHITE)
             holder.view.travelButton.setBackgroundColor(Color.BLACK)
             holder.view.travelButton.text="İHTİYAÇ YOK"
             holder.view.travelButton.isClickable=false
-            holder.view.capasityStock.text=stationFilterList[position].capacity.toString()+"/"+stationFilterList[position].capacity.toString()
+            holder.view.capasityStock.text="Kapasite: "+stationFilterList[position].capacity.toString()+"\n"+"Stok: " +stationFilterList[position].capacity.toString()
 
 
         }else{
-            holder.view.travelButton.setTextColor(Color.WHITE)
-            holder.view.travelButton.setBackgroundColor(Color.BLUE)
+            holder.view.travelButton.setTextColor(Color.BLACK)
+            holder.view.travelButton.setBackgroundColor(Color.GREEN)
             holder.view.travelButton.text="İSTASYONA GİT"
 
             holder.view.travelButton.setOnClickListener {

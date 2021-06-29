@@ -57,8 +57,7 @@ class SpaceStations() : Fragment() {
 
         station_list.layoutManager= LinearLayoutManager(context)
         station_list.adapter=stationAdapter
-
-
+        search.isIconifiedByDefault=false
         search.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
 
@@ -93,15 +92,19 @@ class SpaceStations() : Fragment() {
 
 
                 if(customPreferences.getMinEus()!!.toDouble()>viewModel.eusValue.value!!.toDouble()){
-                     Toast.makeText(context,"Mevcut EUS diğer istasyonlara gitmek için yeterli değil. Yeni Uzay Aracı Oluşturup Tekrar Deneyiziniz..",
+                     Toast.makeText(context,"Mevcut EUS diğer istasyonlara gitmek için yeterli değil. Yeni Uzay Aracı Oluşturup Tekrar Deneyiniz..",
                      Toast.LENGTH_LONG).show()
                      val intent = Intent(context, MainActivity::class.java)
                       startActivity(intent)
                       activity?.finish()
-                }
-
-                if(customPreferences.getMinUgs()!!>viewModel.ugsValue.value!!){
-                    Toast.makeText(context,"Mevcut UGS diğer istasyon ihtiyaçları için yeterli değil. Yeni Uzay Aracı Oluşturup Tekrar Deneyiziniz..",
+                }else if(customPreferences.getMinUgs()!!>viewModel.ugsValue.value!!){
+                    Toast.makeText(context,"Mevcut UGS diğer istasyon ihtiyaçları için yeterli değil. Yeni Uzay Aracı Oluşturup Tekrar Deneyiniz..",
+                        Toast.LENGTH_LONG).show()
+                    val intent = Intent(context, MainActivity::class.java)
+                    startActivity(intent)
+                    activity?.finish()
+                }else if(customPreferences.getVisitedPosition().size==it.size){
+                    Toast.makeText(context,"Tebrikler Görev Tamamlandı . Yeni Uzay Aracı Oluşturup Tekrar Deneyiniz..",
                         Toast.LENGTH_LONG).show()
                     val intent = Intent(context, MainActivity::class.java)
                     startActivity(intent)
@@ -131,6 +134,8 @@ class SpaceStations() : Fragment() {
             damage?.let {
                 damageValue.text="Hasar : "+damage.toString()
                 if(it==0){
+                    Toast.makeText(context,"Maalesef Uzay Aracının Dayanıklılığı Tükendi. Yeni Uzay Aracı Oluşturup Tekrar Deneyiniz..",
+                        Toast.LENGTH_LONG).show()
                     val intent = Intent(context, MainActivity::class.java)
                     startActivity(intent)
                     activity?.finish()
@@ -187,7 +192,7 @@ class SpaceStations() : Fragment() {
         if(firtVisit){
             firtVisit=false
         }else{
-            viewModel.timer.start()
+           viewModel.timer.start()
         }
         super.onResume()
     }

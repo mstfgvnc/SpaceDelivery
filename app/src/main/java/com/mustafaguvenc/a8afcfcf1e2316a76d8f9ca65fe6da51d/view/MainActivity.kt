@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         speed.progress= customPreferences.getEus()!!
         capasity.progress= customPreferences.getUgs()!!
         sub=strenght.progress + speed.progress + capasity.progress
-        total.text = "Dağıtılacak Puan :" + sub.toString() + " / 15"
+        total.text = "Dağıtılan Puan :" + sub.toString() + " / 15"
 
         strenght.setOnSeekBarChangeListener(object :
             SeekBar.OnSeekBarChangeListener {
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
 
                 strenghtValue.text=strenght.progress.toString()
                 sub=strenght.progress + speed.progress + capasity.progress
-                total.text = "Dağıtılacak Puan :" + sub.toString() + " / 15"
+                total.text = "Dağıtılan Puan :" + sub.toString() + " / 15"
             }
 
             override fun onStartTrackingTouch(seek: SeekBar) {
@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
 
                 speedValue.text=speed.progress.toString()
                 sub=strenght.progress + speed.progress + capasity.progress
-                total.text = "Dağıtılacak Puan :" + sub.toString() + " / 15"
+                total.text = "Dağıtılan Puan :" + sub.toString() + " / 15"
             }
 
             override fun onStartTrackingTouch(seek: SeekBar) {
@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity() {
 
                 capasityValue.text=capasity.progress.toString()
                 sub=strenght.progress + speed.progress + capasity.progress
-                total.text = "Dağıtılacak Puan :" + sub.toString() + " / 15"
+                total.text = "Dağıtılan Puan :" + sub.toString() + " / 15"
             }
 
             override fun onStartTrackingTouch(seek: SeekBar) {

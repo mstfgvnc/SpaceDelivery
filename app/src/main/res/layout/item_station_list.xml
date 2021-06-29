@@ -12,55 +12,45 @@
 
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="100dp"
     android:onClick="@{listener::onStationClicked}"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:background="@drawable/custom_border">
+
     <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    android:layout_weight="3">
+    android:layout_weight="2">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="2.5">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1">
+                        android:layout_height="match_parent"
+
+                        >
 
                         <TextView
                             android:id="@+id/capasity_stock"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="2000/1000">
+                            android:text="2000/1000"
+                            android:textStyle="bold">
 
                         </TextView>
 
                     </RelativeLayout>
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="242EUS"
-                            android:id="@+id/now_eus"
-                            >
 
-                        </TextView>
-
-                    </RelativeLayout>
                 </LinearLayout>
 
             </RelativeLayout>
@@ -73,7 +63,10 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="@{station.name}"
+                    android:textSize="20dp"
                     android:id="@+id/spaceship_name"
+                    android:textStyle="bold"
+
                     >
 
                 </TextView>
@@ -86,7 +79,6 @@
                 <ImageButton
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="15dp"
                     android:background="@null"
                     android:src="@drawable/favorite_in"
                     android:id="@+id/favorite_in_button"
@@ -96,7 +88,6 @@
                 <ImageButton
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="15dp"
                     android:background="@null"
                     android:src="@drawable/favorite_out"
                     android:id="@+id/favorite_out_button">
@@ -109,15 +100,41 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2">
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_centerInParent="true"
-            android:text="İSTASYONA GİT"
-            android:id="@+id/travel_button">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="242EUS"
+                    android:id="@+id/now_eus"
+                    android:textStyle="bold"
+                    >
 
-        </Button>
+                </TextView>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2">
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:text="İSTASYONA GİT"
+                    android:id="@+id/travel_button"
+                    android:textSize="10dp">
+
+                </Button>
+            </RelativeLayout>
+        </LinearLayout>
+
+
 
     </RelativeLayout>
 
