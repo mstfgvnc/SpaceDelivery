@@ -29,27 +29,23 @@ class SpaceStationsViewModel (application : Application): BaseViewModel(applicat
     val error = MutableLiveData<Boolean>()
 
     val ugsValue = MutableLiveData<Int>()
-    val eusValue =  MutableLiveData<Int>()
+    val eusValue =  MutableLiveData<Double>()
     val dsValue =  MutableLiveData<Int>()
     val damage =  MutableLiveData<Int>()
     val currentStation =  MutableLiveData<String>()
     val currentDamageTime = MutableLiveData<Int>()
     lateinit var timer : CountDownTimer
 
-
-
     val shipName = "Uzay Aracı : "+customPreferences.getName()
-
 
     fun refreshData(){
           damage.value=customPreferences.getDamageValue()
-          ugsValue.value = customPreferences.getUgs()?.times(10000)
-          eusValue.value = customPreferences.getEus()?.times(20)
-          dsValue.value = customPreferences.getDs()?.times(10000)
-         currentDamageTime.value=customPreferences.getCurrentDamageTime()
-        currentStation.value=customPreferences.geCurrentStationName()
-        //  currentDamageTime.value = dsValue.value?.div(1000)
-       //   customPreferences.saveMillisUntilFinished(dsValue.value!!.toLong()*10)
+          ugsValue.value = customPreferences.getRemainUgs()
+         eusValue.value = customPreferences.getRemainEus()!!.toDouble()
+          dsValue.value = customPreferences.getRemainDs()
+          currentDamageTime.value=customPreferences.getCurrentDamageTime()
+          currentStation.value=customPreferences.geCurrentStationName()
+
            downTimer()
             if(customPreferences.getFromMain()!!){
                 getDataFromAPI()
@@ -63,7 +59,6 @@ class SpaceStationsViewModel (application : Application): BaseViewModel(applicat
         launch {
             val stations = StationDatabase(getApplication()).stationDao().getAllStations()
             showView(stations)
-           // Toast.makeText(getApplication(),"Turbines From SQLite", Toast.LENGTH_LONG).show()
         }
     }
     private fun getDataFromAPI() {
@@ -110,8 +105,8 @@ class SpaceStationsViewModel (application : Application): BaseViewModel(applicat
         loading.value=false
         error.value=false
 
-    }
 
+    }
 
 
     override fun onCleared() {
@@ -143,9 +138,6 @@ class SpaceStationsViewModel (application : Application): BaseViewModel(applicat
         }
         timer.start()
 
-
     }
-
-
 
 }

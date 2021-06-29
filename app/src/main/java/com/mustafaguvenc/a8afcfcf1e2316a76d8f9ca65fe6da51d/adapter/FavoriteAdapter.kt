@@ -23,7 +23,6 @@ class FavoriteAdapter(val favoriteList : ArrayList<StationModel>):
 
     override fun onCreateViewHolder(parent : ViewGroup, viewType : Int) : FavoriteViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-      //  val view =inflater.inflate(R.layout.item_favorite_list,parent,false)
         val view = DataBindingUtil.inflate<ItemFavoriteListBinding>(inflater,R.layout.item_favorite_list,parent,false)
 
         return FavoriteViewHolder(view)
@@ -45,11 +44,9 @@ class FavoriteAdapter(val favoriteList : ArrayList<StationModel>):
         holder.view.eusForFavorite.text= DecimalFormat("##.##").format(distanceCalculate(favoriteList[position].coordinateX!!,favoriteList[position].coordinateY!!)).toString()
 
         holder.view.favoriteInButtonFv.setOnClickListener {
-          //  it.visibility=View.GONE
             val favoriteHashSetStaion = customPreferences.getFavoritePosition()
             favoriteHashSetStaion.remove(mapRealPosition[position])
             customPreferences.saveFavoritePosition(favoriteHashSetStaion)
-         //   holder.itemView.visibility=View.GONE
             val listFavorite = ArrayList<StationModel>()
             for(i in 0..favoriteList.size-1){
                 if(i!=position){

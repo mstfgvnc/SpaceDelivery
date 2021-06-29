@@ -40,7 +40,6 @@ class SecondActivity : AppCompatActivity() {
 
             }
 
-
         }
         favoriteButton.setOnClickListener {
             if(navigationWhere!=1){

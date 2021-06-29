@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
-      //  setContentView(R.layout.activity_main)
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         getSupportActionBar()?.hide()
         val customPreferences = CustomSharedPreferences(applicationContext)
@@ -29,8 +28,11 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext,"Lütfen Uzay Aracının İsmini Giriniz...",Toast.LENGTH_SHORT).show()
             }else{
                 customPreferences.saveDs(strenght.progress)
+                customPreferences.saveRemainDs(strenght.progress*10000)
                 customPreferences.saveEus(speed.progress)
+                customPreferences.saveRemainEus((speed.progress*20).toFloat())
                 customPreferences.saveUgs(capasity.progress)
+                customPreferences.saveRemainUgs(capasity.progress*10000)
                 customPreferences.saveName(spaceshipName.text.toString())
                 customPreferences.saveCurrentCoordinateX(0.0)
                 customPreferences.saveCurrentCoordinateY(0.0)
@@ -38,24 +40,15 @@ class MainActivity : AppCompatActivity() {
                 customPreferences.saveDamageValue(100)
                 customPreferences.saveCurrentDamageTime(strenght.progress*10)
                 customPreferences.saveCurrentStationName("Dünya")
-                customPreferences.saveVisitedPosition(hashSetOf())
+                customPreferences.saveVisitedPosition(hashSetOf(0))
                 customPreferences.saveFromMain(true)
 
-
-
                 val intent = Intent(this, SecondActivity::class.java)
-                    /*.apply {
-                    // putExtra(EXTRA_MESSAGE, message)
-                }
-
-                     */
-
                 startActivity(intent)
                 finish()
             }
 
         }
-
 
         strenghtValue.text=customPreferences.getDs().toString()
         speedValue.text=customPreferences.getEus().toString()
@@ -65,18 +58,16 @@ class MainActivity : AppCompatActivity() {
         speed.progress= customPreferences.getEus()!!
         capasity.progress= customPreferences.getUgs()!!
         sub=strenght.progress + speed.progress + capasity.progress
-        total.text = "Dağıtılan Puan :" + sub.toString()
-
+        total.text = "Dağıtılacak Puan :" + sub.toString() + " / 15"
 
         strenght.setOnSeekBarChangeListener(object :
             SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seek: SeekBar,
                                            progress: Int, fromUser: Boolean) {
-                // write custom code for progress is changed
 
                 strenghtValue.text=strenght.progress.toString()
                 sub=strenght.progress + speed.progress + capasity.progress
-                total.text = "Dağıtılan Puan :" + sub.toString()
+                total.text = "Dağıtılacak Puan :" + sub.toString() + " / 15"
             }
 
             override fun onStartTrackingTouch(seek: SeekBar) {
@@ -98,7 +89,7 @@ class MainActivity : AppCompatActivity() {
 
                 speedValue.text=speed.progress.toString()
                 sub=strenght.progress + speed.progress + capasity.progress
-                total.text = "Dağıtılan Puan :" + sub.toString()
+                total.text = "Dağıtılacak Puan :" + sub.toString() + " / 15"
             }
 
             override fun onStartTrackingTouch(seek: SeekBar) {
@@ -120,7 +111,7 @@ class MainActivity : AppCompatActivity() {
 
                 capasityValue.text=capasity.progress.toString()
                 sub=strenght.progress + speed.progress + capasity.progress
-                total.text = "Dağıtılan Puan :" + sub.toString()
+                total.text = "Dağıtılacak Puan :" + sub.toString() + " / 15"
             }
 
             override fun onStartTrackingTouch(seek: SeekBar) {
@@ -133,7 +124,6 @@ class MainActivity : AppCompatActivity() {
 
             }
         })
-
 
     }
 

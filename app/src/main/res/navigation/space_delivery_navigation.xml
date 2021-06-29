@@ -14,6 +14,9 @@
         <argument
             android:name="fromFragment"
             app:argType="boolean" />
+        <action
+            android:id="@+id/action_spaceStations_self"
+            app:destination="@id/spaceStations" />
     </fragment>
     <fragment
         android:id="@+id/favoriteStations"

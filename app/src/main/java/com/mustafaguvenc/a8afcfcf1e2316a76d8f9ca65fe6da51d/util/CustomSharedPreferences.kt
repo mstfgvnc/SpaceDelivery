@@ -22,9 +22,11 @@ class CustomSharedPreferences {
         private val CURRENT_STATION_NAME = "current_station_name"
         private val VISITED_POSITION= "visited_position"
         private val FROM_MAIN= "from_main"
-
-
-
+        private val REMAIN_DS= "remain_ds"
+        private val REMAIN_EUS= "remain_eus"
+        private val REMAIN_UGS= "remain_ugs"
+        private val MIN_EUS= "min_eus"
+        private val MIN_UGS= "min_ugs"
 
 
         private var sharedPreferences: SharedPreferences? = null
@@ -42,8 +44,6 @@ class CustomSharedPreferences {
             sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
             return CustomSharedPreferences()
         }
-
-
 
     }
 
@@ -69,12 +69,14 @@ class CustomSharedPreferences {
         }
     }
 
-
-
-
     fun saveUgs(value: Int) {
         sharedPreferences?.edit(commit = true){
             putInt(SPACESHIP_UGS,value)
+        }
+    }
+    fun saveRemainUgs(value: Int) {
+        sharedPreferences?.edit(commit = true){
+            putInt(REMAIN_UGS,value)
         }
     }
     fun saveEus(value: Int) {
@@ -82,9 +84,29 @@ class CustomSharedPreferences {
             putInt(SPACESHIP_EUS,value)
         }
     }
+    fun saveRemainEus(value: Float) {
+        sharedPreferences?.edit(commit = true){
+            putFloat(REMAIN_EUS,value)
+        }
+    }
+    fun saveMinEus(value: Float) {
+        sharedPreferences?.edit(commit = true){
+            putFloat(MIN_EUS,value)
+        }
+    }
+    fun saveMinUgs(value: Int) {
+        sharedPreferences?.edit(commit = true){
+            putInt(MIN_UGS,value)
+        }
+    }
     fun saveDs(value: Int) {
         sharedPreferences?.edit(commit = true){
             putInt(SPACESHIP_DS,value)
+        }
+    }
+    fun saveRemainDs(value: Int) {
+        sharedPreferences?.edit(commit = true){
+            putInt(REMAIN_DS,value)
         }
     }
     fun saveName(value: String) {
@@ -131,19 +153,22 @@ class CustomSharedPreferences {
         }
     }
     fun getFromMain() = sharedPreferences?.getBoolean(FROM_MAIN,true)
-
-
     fun getCurrentDamageTime() = sharedPreferences?.getInt(CURRENT_DAMAGE_TIME,0)
     fun geCurrentStationName() = sharedPreferences?.getString(CURRENT_STATION_NAME,"")
     fun getUgs() = sharedPreferences?.getInt(SPACESHIP_UGS,0)
+    fun getRemainUgs() = sharedPreferences?.getInt(REMAIN_UGS,0)
     fun getEus() = sharedPreferences?.getInt(SPACESHIP_EUS,0)
+    fun getRemainEus() = sharedPreferences?.getFloat(REMAIN_EUS,0f)
     fun getDs() = sharedPreferences?.getInt(SPACESHIP_DS,0)
+    fun getRemainDs() = sharedPreferences?.getInt(REMAIN_DS,0)
     fun getDamageValue() = sharedPreferences?.getInt(DAMAGE_VALUE,0)
     fun getCurrentCoordinateX() = sharedPreferences?.getFloat(COORDINATE_X,0f)
     fun getCurrentCoordinateY() = sharedPreferences?.getFloat(COORDINATE_Y,0f)
     fun getName() = sharedPreferences?.getString(SPACESHIP_NAME,"")
     fun getMillisUntilFinished() = sharedPreferences?.getLong(MILLES_UNTIL_FINESHED,0)
 
+    fun getMinEus() = sharedPreferences?.getFloat(MIN_EUS,-1f)
+    fun getMinUgs() = sharedPreferences?.getInt(MIN_UGS,-1)
 
     fun getFavoritePosition():HashSet<Int> {
         val favoriteIntSet= hashSetOf<Int>()

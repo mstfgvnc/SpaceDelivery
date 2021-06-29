@@ -15,27 +15,10 @@ class FavoriteStationViewModel(application : Application): BaseViewModel(applica
 
     val favoriteStations = MutableLiveData<List<StationModel>>()
     private var customPreferences = CustomSharedPreferences(getApplication())
-   // private val disposable = CompositeDisposable()
 
     fun refreshData(){
 
         getDataFromSQLite()
-        /*
-        val sonuc = customPreferences.getFavoritePosition()
-        var yaz =""
-        for(i in sonuc){
-            yaz= yaz  +i. toString()
-        }
-        Toast.makeText(getApplication(),yaz,Toast.LENGTH_LONG).show()
-        val station1 = StationModel("opl",0.2,0.9,1000,200,800)
-        val station2 = StationModel("sdsa",5.2,0.9,1500,300,500)
-        val station3 = StationModel("opal",0.2,3.9,2000,200,400)
-
-        val stationList = arrayListOf<StationModel>(station1,station2,station3)
-
-        favoriteStations.value=stationList
-
-         */
 
     }
 
@@ -51,7 +34,6 @@ class FavoriteStationViewModel(application : Application): BaseViewModel(applica
 
             }
             favoriteStations.value=listFavorite
-            // Toast.makeText(getApplication(),"Turbines From SQLite", Toast.LENGTH_LONG).show()
         }
     }
 

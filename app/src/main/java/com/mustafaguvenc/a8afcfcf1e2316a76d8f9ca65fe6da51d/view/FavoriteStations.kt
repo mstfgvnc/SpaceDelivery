@@ -30,15 +30,12 @@ class FavoriteStations : Fragment() {
         inflater : LayoutInflater, container : ViewGroup?,
         savedInstanceState : Bundle?
     ) : View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_favorite_stations, container, false)
     }
 
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
-
-         //   println(FavoriteStationsArgs.fromBundle(it).favoriStationPosition)
 
         }
 
@@ -60,9 +57,6 @@ class FavoriteStations : Fragment() {
 
         })
 
-
     }
-
-
 
 }

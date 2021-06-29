@@ -1,37 +1,32 @@
 package com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.view
 
 
-
-
-
 import android.app.Application
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.BR
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.R
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.adapter.StationAdapter
-import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.model.StationModel
+import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.util.CustomSharedPreferences
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.viewmodel.SpaceStationsViewModel
 import kotlinx.android.synthetic.main.fragment_space_stations.*
-import kotlinx.android.synthetic.main.item_station_list.*
+import java.text.DecimalFormat
 
 
-class SpaceStations : Fragment() {
+class SpaceStations() : Fragment() {
 
-    private  lateinit var viewModel : SpaceStationsViewModel
+    private lateinit var viewModel : SpaceStationsViewModel
     private  val stationAdapter = StationAdapter(arrayListOf())
+    private var customPreferences = CustomSharedPreferences()
+
     var firtVisit =true
 
     override fun onCreate(savedInstanceState : Bundle?) {
@@ -44,7 +39,6 @@ class SpaceStations : Fragment() {
         savedInstanceState : Bundle?
     ) : View? {
 
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_space_stations, container, false)
 
     }
@@ -52,17 +46,12 @@ class SpaceStations : Fragment() {
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         arguments?.let {
 
         }
 
         viewModel = ViewModelProviders.of(this).get(SpaceStationsViewModel::class.java)
         viewModel.refreshData()
-
-
-
 
         shipName.text = viewModel.shipName
 
@@ -93,9 +82,7 @@ class SpaceStations : Fragment() {
 
         observeLiveData()
 
-
     }
-
 
     fun observeLiveData(){
 
@@ -104,11 +91,30 @@ class SpaceStations : Fragment() {
                 station_list.visibility=View.VISIBLE
                 stationAdapter.updateStationList(stations)
 
+
+                if(customPreferences.getMinEus()!!.toDouble()>viewModel.eusValue.value!!.toDouble()){
+                     Toast.makeText(context,"Mevcut EUS diğer istasyonlara gitmek için yeterli değil. Yeni Uzay Aracı Oluşturup Tekrar Deneyiziniz..",
+                     Toast.LENGTH_LONG).show()
+                     val intent = Intent(context, MainActivity::class.java)
+                      startActivity(intent)
+                      activity?.finish()
+                }
+
+                if(customPreferences.getMinUgs()!!>viewModel.ugsValue.value!!){
+                    Toast.makeText(context,"Mevcut UGS diğer istasyon ihtiyaçları için yeterli değil. Yeni Uzay Aracı Oluşturup Tekrar Deneyiziniz..",
+                        Toast.LENGTH_LONG).show()
+                    val intent = Intent(context, MainActivity::class.java)
+                    startActivity(intent)
+                    activity?.finish()
+                }
+
+
             }
         })
         viewModel.ugsValue.observe(viewLifecycleOwner, Observer {ugsValue ->
             ugsValue?.let {
                 ugs.text="UGS : "+(ugsValue.toString())
+
             }
         })
         viewModel.dsValue.observe(viewLifecycleOwner, Observer {dsValue ->
@@ -118,7 +124,7 @@ class SpaceStations : Fragment() {
         })
         viewModel.eusValue.observe(viewLifecycleOwner, Observer {eusValue ->
             eusValue?.let {
-                eus.text="EUS : "+eusValue.toString()
+                eus.text="EUS : "+DecimalFormat("##.##").format(eusValue).toString()
             }
         })
         viewModel.damage.observe(viewLifecycleOwner, Observer {damage ->
@@ -154,7 +160,6 @@ class SpaceStations : Fragment() {
 
                 }else{
                     station_loading.visibility=View.GONE
-                //    station_error.visibility=View.GONE
 
                 }
 
