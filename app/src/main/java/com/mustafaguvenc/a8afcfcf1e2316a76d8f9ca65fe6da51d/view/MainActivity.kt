@@ -9,16 +9,22 @@ import androidx.databinding.DataBindingUtil
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.R
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.databinding.ActivityMainBinding
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.util.CustomSharedPreferences
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
+
 
 class MainActivity : AppCompatActivity() {
 
     var sub = 0
 
+
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
+
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         getSupportActionBar()?.hide()
+
         val customPreferences = CustomSharedPreferences(applicationContext)
         start_button.setOnClickListener {
 

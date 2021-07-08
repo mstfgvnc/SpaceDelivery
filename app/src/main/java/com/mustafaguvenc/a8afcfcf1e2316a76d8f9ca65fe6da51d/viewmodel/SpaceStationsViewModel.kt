@@ -36,7 +36,7 @@ class SpaceStationsViewModel (application : Application): BaseViewModel(applicat
     val currentDamageTime = MutableLiveData<Int>()
     lateinit var timer : CountDownTimer
 
-    val shipName = customPreferences.getName()
+    var shipName = customPreferences.getName()
 
     fun refreshData(){
           damage.value=customPreferences.getDamageValue()

@@ -3,6 +3,7 @@ package com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.adapter
 
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -10,25 +11,34 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.R
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.databinding.ItemStationListBinding
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.model.StationModel
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.util.CustomSharedPreferences
+import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.view.MainActivity
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.view.SpaceStationsDirections
+import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.viewmodel.SpaceStationsViewModel
 import java.text.DecimalFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 
-class StationAdapter(val stationList : ArrayList<StationModel>):RecyclerView.Adapter<StationAdapter.StationViewHolder>() ,StationClickListener,Filterable{
+class StationAdapter(val stationList : ArrayList<StationModel>,fragment : Fragment):RecyclerView.Adapter<StationAdapter.StationViewHolder>() ,StationClickListener,Filterable{
     private var customPreferences = CustomSharedPreferences()
-    val currentX = customPreferences.getCurrentCoordinateX()?.toDouble()
-    val currentY = customPreferences.getCurrentCoordinateY()?.toDouble()
+    var currentX = customPreferences.getCurrentCoordinateX()?.toDouble()
+    var currentY = customPreferences.getCurrentCoordinateY()?.toDouble()
     var stationFilterList = ArrayList<StationModel>()
     var stationFilterListFull = ArrayList<StationModel>()
+    val fragment:Fragment=fragment
+
+    private lateinit var viewModel : SpaceStationsViewModel
+
 
     init {
         stationFilterList=stationList
@@ -118,9 +128,37 @@ class StationAdapter(val stationList : ArrayList<StationModel>):RecyclerView.Ada
 
                     customPreferences.saveRemainUgs(customPreferences.getRemainUgs()?.minus(stationFilterList[position].need!!)!!)
                     customPreferences.saveRemainEus(customPreferences.getRemainEus()?.minus(eusSpaceship.toFloat())!!)
+                    customPreferences.saveCurrentStationName(stationFilterList[position].name!!)
                     customPreferences.saveFromMain(false)
+
+                     currentX = customPreferences.getCurrentCoordinateX()?.toDouble()
+                     currentY = customPreferences.getCurrentCoordinateY()?.toDouble()
+
+                    viewModel = ViewModelProviders.of(fragment).get(SpaceStationsViewModel::class.java)
+                    viewModel.ugsValue.value = customPreferences.getRemainUgs()
+                    viewModel.eusValue.value= customPreferences.getRemainEus()!!.toDouble()
+                    viewModel.currentStation.value = customPreferences.geCurrentStationName()
+
+
+                  //  notifyItemChanged(position)
+                 //   notifyItemRangeChanged(position, stationFilterList.size)
+                    notifyDataSetChanged()
+
+                    if(customPreferences.getVisitedPosition().size==stationFilterList.size){
+                        Toast.makeText(context,"Tebrikler Görev Tamamlandı . Yeni Uzay Aracı Oluşturup Tekrar Deneyiniz..",
+                            Toast.LENGTH_LONG).show()
+                        val intent = Intent(context, MainActivity::class.java)
+                       startActivity(context,intent,null)
+                    }
+
+
+                    /*
                     val action =SpaceStationsDirections.actionSpaceStationsSelf(true)
                     Navigation.findNavController(it).navigate(action)
+
+                     */
+
+
 
                 }
 

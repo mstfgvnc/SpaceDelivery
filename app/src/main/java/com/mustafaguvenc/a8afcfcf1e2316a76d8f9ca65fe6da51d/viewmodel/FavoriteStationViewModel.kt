@@ -11,7 +11,7 @@ import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.util.CustomSharedPref
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.launch
 
-class FavoriteStationViewModel(application : Application): BaseViewModel(application){
+class   FavoriteStationViewModel(application : Application): BaseViewModel(application){
 
     val favoriteStations = MutableLiveData<List<StationModel>>()
     private var customPreferences = CustomSharedPreferences(getApplication())

@@ -24,7 +24,7 @@ import java.text.DecimalFormat
 class SpaceStations() : Fragment() {
 
     private lateinit var viewModel : SpaceStationsViewModel
-    private  val stationAdapter = StationAdapter(arrayListOf())
+    private  val stationAdapter = StationAdapter(arrayListOf(),this)
     private var customPreferences = CustomSharedPreferences()
 
     var firtVisit =true
@@ -90,7 +90,7 @@ class SpaceStations() : Fragment() {
                 station_list.visibility=View.VISIBLE
                 stationAdapter.updateStationList(stations)
 
-
+/*
                 if(customPreferences.getMinEus()!!.toDouble()>viewModel.eusValue.value!!.toDouble()){
                      Toast.makeText(context,"Mevcut EUS diğer istasyonlara gitmek için yeterli değil. Yeni Uzay Aracı Oluşturup Tekrar Deneyiniz..",
                      Toast.LENGTH_LONG).show()
@@ -112,11 +112,23 @@ class SpaceStations() : Fragment() {
                 }
 
 
+ */
+
             }
         })
+
+
         viewModel.ugsValue.observe(viewLifecycleOwner, Observer {ugsValue ->
             ugsValue?.let {
                 ugs.text="UGS : "+(ugsValue.toString())
+                if(customPreferences.getMinUgs()!!>ugsValue){
+                    Toast.makeText(context,"Mevcut UGS diğer istasyon ihtiyaçları için yeterli değil. Yeni Uzay Aracı Oluşturup Tekrar Deneyiniz..",
+                        Toast.LENGTH_LONG).show()
+                    val intent = Intent(context, MainActivity::class.java)
+                    startActivity(intent)
+                    activity?.finish()
+                }
+
 
             }
         })
@@ -128,6 +140,13 @@ class SpaceStations() : Fragment() {
         viewModel.eusValue.observe(viewLifecycleOwner, Observer {eusValue ->
             eusValue?.let {
                 eus.text="EUS : "+DecimalFormat("##.##").format(eusValue).toString()
+                if(customPreferences.getMinEus()!!.toDouble()>eusValue){
+                    Toast.makeText(context,"Mevcut EUS diğer istasyonlara gitmek için yeterli değil. Yeni Uzay Aracı Oluşturup Tekrar Deneyiniz..",
+                        Toast.LENGTH_LONG).show()
+                    val intent = Intent(context, MainActivity::class.java)
+                    startActivity(intent)
+                    activity?.finish()
+                }
             }
         })
         viewModel.damage.observe(viewLifecycleOwner, Observer {damage ->

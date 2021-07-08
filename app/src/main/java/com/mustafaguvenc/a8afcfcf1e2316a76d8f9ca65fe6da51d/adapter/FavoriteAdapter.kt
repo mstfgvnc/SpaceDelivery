@@ -59,6 +59,7 @@ class FavoriteAdapter(val favoriteList : ArrayList<StationModel>):
     }
 
     fun updateFavoriteList(newFavoriteList: List<StationModel >) {
+
         favoriteList.clear()
         favoriteList.addAll(newFavoriteList)
         notifyDataSetChanged()
