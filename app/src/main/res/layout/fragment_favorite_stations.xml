@@ -11,7 +11,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="FAVORİ İSTAYONLAR"
+            android:text="Favorite Stations"
             android:gravity="center"
             android:padding="15dp"
             android:background="@drawable/custom_border"

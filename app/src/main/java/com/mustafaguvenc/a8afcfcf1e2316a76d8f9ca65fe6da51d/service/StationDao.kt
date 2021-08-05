@@ -1,9 +1,8 @@
 package com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.service
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.model.StationModel
+
 
 @Dao
 interface StationDao {
@@ -19,5 +18,12 @@ interface StationDao {
 
     @Query("DELETE FROM stationmodel")
     suspend fun deleteAllStations()
+
+    @Update
+    fun update(stationData: StationModel)
+
+
+
+
 
 }

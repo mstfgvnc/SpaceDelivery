@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="stationShip"
+            type="com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.viewmodel.SpaceShipCreateViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".view.MainActivity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text='@{"Distributed Point: "+stationShip.sub +" / 15"}'
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:id="@+id/total"
+                >
+
+            </TextView>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Enter name of spaceship..."
+                android:textStyle="italic"
+                android:layout_centerInParent="true"
+                android:inputType="text"
+                android:id="@+id/spaceshipName">
+
+            </EditText>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Endurance"
+                        android:layout_centerInParent="true"
+                        android:textSize="15dp"
+                        android:textStyle="bold">
+
+                    </TextView>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+                        <SeekBar
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="4"
+                            android:layout_margin="5dp"
+                            android:id="@+id/strenght"
+                            android:max="13">
+                        </SeekBar>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:id="@+id/strenghtValue"
+                            android:text="@{stationShip.dsValue.toString()}"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+
+                            >
+
+                        </TextView>
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Speed"
+                        android:layout_centerInParent="true"
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        >
+
+                    </TextView>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+                        <SeekBar
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="4"
+                            android:layout_margin="5dp"
+                            android:id="@+id/speed"
+                            android:max="13">
+                        </SeekBar>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@{stationShip.eusValue.toString()}"
+                            android:id="@+id/speedValue"
+                            android:textSize="20dp"
+                            android:textStyle="bold">
+
+                        </TextView>
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Capacity"
+                        android:layout_centerInParent="true"
+                        android:textStyle="bold"
+                        android:textSize="15dp"
+                        >
+
+                    </TextView>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+                        <SeekBar
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="4"
+                            android:layout_margin="5dp"
+                            android:id="@+id/capasity"
+                            android:max="13">
+                        </SeekBar>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@{stationShip.ugsValue.toString()}"
+                            android:id="@+id/capasityValue"
+                            android:textSize="20dp"
+                            android:textStyle="bold">
+
+                        </TextView>
+                    </LinearLayout>
+
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
+
+            <Button
+                android:id="@+id/start_button"
+                android:layout_width="150dp"
+                android:layout_height="75dp"
+                android:layout_centerInParent="true"
+                android:background="#388E3C"
+                android:rotationY="12"
+
+                android:text="START DELİVERY"
+                android:textStyle="bold">
+
+            </Button>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</layout>

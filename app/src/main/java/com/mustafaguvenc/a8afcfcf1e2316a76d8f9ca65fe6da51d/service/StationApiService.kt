@@ -7,7 +7,9 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class StationApiService {
-    private  val BASE_URL = "https://run.mocky.io/"
+ //   private  val BASE_URL = "https://run.mocky.io/"
+    private  val BASE_URL = "https://gist.githubusercontent.com/"
+
     private  val api = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())

@@ -40,11 +40,20 @@
                         >
 
                         <TextView
-                            android:id="@+id/capasity_stock"
+                            android:id="@+id/capasity"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="2000/1000"
+                            android:gravity="center_horizontal|top"
+                            android:text='@{"Capacity :"+String.valueOf(station.capacity)}'
+                            android:textStyle="bold">
+
+                        </TextView>
+                        <TextView
+                            android:id="@+id/stock"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_horizontal|bottom"
+                            android:text='@{"Stock :"+String.valueOf(station.nowStock)}'
                             android:textStyle="bold">
 
                         </TextView>
@@ -107,14 +116,14 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
+
                 <TextView
+                    android:id="@+id/now_eus"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="242EUS"
-                    android:id="@+id/now_eus"
-                    android:textStyle="bold"
-                    >
+                    android:text='@{"Distance: "+String.valueOf(station.nowEus)}'
+                    android:textStyle="bold">
 
                 </TextView>
             </RelativeLayout>
@@ -126,7 +135,6 @@
                     android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:layout_centerInParent="true"
-                    android:text="İSTASYONA GİT"
                     android:id="@+id/travel_button"
                     android:textSize="10dp">
 

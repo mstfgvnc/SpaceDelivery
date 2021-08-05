@@ -6,6 +6,7 @@
         <variable
             name="values"
             type="com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.viewmodel.SpaceStationsViewModel" />
+
     </data>
 <LinearLayout
     android:layout_width="match_parent"
@@ -80,29 +81,27 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
+            android:gravity="center_vertical|left"
+
             android:id="@+id/currentStationName"
+            android:text='@{"   Current Location : "+ values.currentStation}'
             android:textStyle="bold"
             android:textSize="15dp">
 
         </TextView>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@drawable/custom_border">
+
         <Button
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_alignParentRight="true"
-            android:text="Bitir"
+            android:text="Start Again"
             android:textSize="12dp"
             android:id="@+id/newSpaceship"
             >
 
         </Button>
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -123,6 +122,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:text='@{"SS: "+ String.valueOf(values.ugsValue)}'
                     android:textSize="15dp"
                     android:textStyle="bold">
 
@@ -137,7 +137,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="EUS : "
+                    android:text='@{"UST: "+ String.valueOf(values.eusValue)}'
                     android:gravity="center"
                     android:id="@+id/eus"
                     android:textSize="15dp"
@@ -153,7 +153,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="DS : "
+                    android:text='@{"ET: "+ String.valueOf(values.dsValue)}'
                     android:gravity="center"
                     android:id="@+id/ds"
                     android:textSize="15dp"
@@ -178,12 +178,13 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/custom_border">
+
                 <TextView
+                    android:id="@+id/shipName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="SHIP NAME "
                     android:gravity="center"
-                    android:id="@+id/shipName"
+                    android:text="@{values.shipName}"
                     android:textSize="13dp"
                     android:textStyle="bold">
 
@@ -200,6 +201,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:id="@+id/damageValue"
+                    android:text='@{"Power : "+ String.valueOf(values.damage)}'
                     android:textSize="15dp"
                     android:textStyle="bold">
 
@@ -215,6 +217,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:id="@+id/currentDamage"
+                    android:text='@{"Current ET: "+ String.valueOf(values.currentDamageTime)+"s"}'
                     android:textSize="15dp"
                     android:textStyle="bold">
 

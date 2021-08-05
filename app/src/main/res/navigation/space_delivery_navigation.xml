@@ -3,27 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/space_delivery_navigation"
-    app:startDestination="@id/spaceStations">
+    app:startDestination="@id/spaceShipCreate">
     <fragment
-        android:id="@+id/spaceStations"
-        android:name="com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.view.SpaceStations"
-        android:label="SpaceStations">
+        android:id="@+id/spaceShipCreate"
+        android:name="com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.view.SpaceShipCreate"
+        android:label="SpaceShipCreate" >
         <action
-            android:id="@+id/action_spaceStations_to_favoriteStations"
-            app:destination="@id/favoriteStations" />
+            android:id="@+id/action_spaceShipCreate_to_spacePort"
+            app:destination="@id/spacePort" />
         <argument
-            android:name="fromFragment"
-            app:argType="boolean" />
-        <action
-            android:id="@+id/action_spaceStations_self"
-            app:destination="@id/spaceStations" />
+            android:name="deneme"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
-        android:id="@+id/favoriteStations"
-        android:name="com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.view.FavoriteStations"
-        android:label="FavoriteStations" >
+        android:id="@+id/spacePort"
+        android:name="com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.view.SpacePort"
+        android:label="SpacePort" >
         <action
-            android:id="@+id/action_favoriteStations_to_spaceStations"
-            app:destination="@id/spaceStations" />
+            android:id="@+id/action_spacePort_to_spaceShipCreate"
+            app:destination="@id/spaceShipCreate" />
+        <argument
+            android:name="ugsValue"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="dsValue"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="eusValue"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="shipName"
+            app:argType="string" />
     </fragment>
 </navigation>

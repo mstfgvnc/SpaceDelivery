@@ -1,25 +1,40 @@
 package com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.R
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.databinding.ItemFavoriteListBinding
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.model.StationModel
-import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.util.CustomSharedPreferences
+import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.service.StationDatabase
+import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.viewmodel.FavoriteStationViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.DecimalFormat
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class FavoriteAdapter(val favoriteList : ArrayList<StationModel>):
+
+class FavoriteAdapter
+   @Inject constructor
+        ( val favoriteList : ArrayList<StationModel>,  val fragment: Fragment)
+    :
     RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
-    private var customPreferences = CustomSharedPreferences()
+    private lateinit var viewModel: FavoriteStationViewModel
+
     class FavoriteViewHolder(var view :ItemFavoriteListBinding) : RecyclerView.ViewHolder(view.root) {
 
     }
 
-
+    lateinit var context:Context
     override fun onCreateViewHolder(parent : ViewGroup, viewType : Int) : FavoriteViewHolder {
         val inflater = LayoutInflater.from(parent.context)
+        context=parent.context
         val view = DataBindingUtil.inflate<ItemFavoriteListBinding>(inflater,R.layout.item_favorite_list,parent,false)
 
         return FavoriteViewHolder(view)
@@ -27,30 +42,33 @@ class FavoriteAdapter(val favoriteList : ArrayList<StationModel>):
 
     override fun onBindViewHolder(holder : FavoriteViewHolder, position : Int) {
 
-        val realPosition = customPreferences.getFavoritePosition()
-        val realPositionList = ArrayList<Int>()
-        for(i in realPosition){
-            realPositionList.add(i)
-        }
-        realPositionList.sort()
-        val mapRealPosition = hashMapOf<Int,Int>()
-        mapRealPosition.put(position,realPositionList[position])
-
-
         holder.view.stationFv = favoriteList[position]
         holder.view.eusForFavorite.text="Uzaklık: "+"\n" +DecimalFormat("##.##").format(distanceCalculate(favoriteList[position].coordinateX!!,favoriteList[position].coordinateY!!)).toString()+" EUS"
-        holder.view.capasityForFavorite.text="Kapasite: "+"\n" +favoriteList[position].capacity.toString()
+        favoriteList[position].nowEusToEarth=Math.round(distanceCalculate(favoriteList[position].coordinateX!!,favoriteList[position].coordinateY!!)*100)/100.00
         holder.view.favoriteInButtonFv.setOnClickListener {
-            val favoriteHashSetStaion = customPreferences.getFavoritePosition()
-            favoriteHashSetStaion.remove(mapRealPosition[position])
-            customPreferences.saveFavoritePosition(favoriteHashSetStaion)
-            val listFavorite = ArrayList<StationModel>()
-            for(i in 0..favoriteList.size-1){
-                if(i!=position){
-                    listFavorite.add(favoriteList[i])
-                }
-            }
+
+            updateStation(favoriteList.get(position).uuid,favoriteList.get(position))
+            favoriteList.removeAt(position)
+            val listFavorite = ArrayList<StationModel>(favoriteList)
             updateFavoriteList(listFavorite)
+
+        }
+
+    }
+
+    private fun updateStation(position: Int,stationModel: StationModel) {
+        viewModel=ViewModelProvider(fragment).get(FavoriteStationViewModel::class.java)
+        viewModel.launch {
+
+            val editedItem=stationModel
+            editedItem.uuid=position
+            editedItem.favoriteBool=false
+
+            withContext(Dispatchers.IO) {
+                StationDatabase(context).stationDao().update(editedItem)
+            }
+
+
         }
     }
 

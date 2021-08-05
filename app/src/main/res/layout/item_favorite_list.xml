@@ -29,11 +29,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1">
+
                             <TextView
+                                android:id="@+id/capasityForFavorite"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
-                                android:id="@+id/capasityForFavorite"
+                                android:text='@{"Capacity: "+String.valueOf(stationFv.capacity)}'
                                 android:textSize="13dp"
 
                                 >
@@ -49,7 +51,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
-                                android:text="242EUS"
+                                android:text='@{"Distance: "+String.valueOf(stationFv.nowEusToEarth)}'
                                 android:id="@+id/eusForFavorite"
                                 android:textSize="13dp"
 
