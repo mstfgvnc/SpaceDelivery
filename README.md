@@ -5,7 +5,7 @@ Aim; To transport the space suits needed by the stations to the warehouses by tr
 Used Technologies: **Android, Kotlin, MVVM, Room, Navigation, Fragments, Data Binding, Retrofit, RxJava, LiveData, Shared Preferences, Dagger-Hilt, ViewPager2, RecyclerView, SearchView**
 
 
- ![enter image description here](https://github.com/mstfgvnc/8afcfcf1e2316a76d8f9ca65fe6da51d/blob/master/ss/1a.jpg?raw=true)  ![enter image description here](https://github.com/mstfgvnc/8afcfcf1e2316a76d8f9ca65fe6da51d/blob/master/ss/1b.jpg?raw=true) ![enter image description here](https://github.com/mstfgvnc/8afcfcf1e2316a76d8f9ca65fe6da51d/blob/master/ss/1c.jpg?raw=true)
+ ![enter image description here](https://github.com/mstfgvnc/SpaceDelivery/blob/master/app/src/main/assets/ss1.jpg?raw=true)  ![enter image description here](https://github.com/mstfgvnc/8afcfcf1e2316a76d8f9ca65fe6da51d/blob/master/ss/1b.jpg?raw=true) ![enter image description here](https://github.com/mstfgvnc/8afcfcf1e2316a76d8f9ca65fe6da51d/blob/master/ss/1c.jpg?raw=true)
 
 
 
