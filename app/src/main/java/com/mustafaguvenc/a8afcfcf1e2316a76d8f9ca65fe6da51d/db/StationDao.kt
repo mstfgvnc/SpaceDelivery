@@ -1,4 +1,4 @@
-package com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.service
+package com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.db
 
 import androidx.room.*
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.model.StationModel
@@ -20,10 +20,7 @@ interface StationDao {
     suspend fun deleteAllStations()
 
     @Update
-    fun update(stationData: StationModel)
-
-
-
+    suspend fun update(stationData: StationModel)
 
 
 }

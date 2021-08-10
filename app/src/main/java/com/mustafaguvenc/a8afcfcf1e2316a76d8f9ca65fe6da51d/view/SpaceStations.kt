@@ -23,17 +23,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_space_stations.*
 import javax.inject.Inject
 
-// @AndroidEntryPoint
+ @AndroidEntryPoint
 class  SpaceStations : Fragment() {
 
-    private lateinit var viewModel : SpaceStationsViewModel
-  //   @Inject
-  //   lateinit var viewModel : SpaceStationsViewModel
+   private val viewModel : SpaceStationsViewModel by viewModels()
+   private lateinit var binding :FragmentSpaceStationsBinding
+   var stationAdapter = StationAdapter(arrayListOf(),this)
 
-    private lateinit var binding :FragmentSpaceStationsBinding
-    var stationAdapter = StationAdapter(arrayListOf(),this)
-  //  @Inject
- //   lateinit var stationAdapter :StationAdapter
 
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,10 +44,8 @@ class  SpaceStations : Fragment() {
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_space_stations, container, false)
         binding.lifecycleOwner=this
-
-        viewModel = ViewModelProvider(this).get(SpaceStationsViewModel::class.java)
-
         binding.values = viewModel//attach your viewModel to xml
+
         return binding.root
 
     }
@@ -104,7 +98,7 @@ class  SpaceStations : Fragment() {
         viewModel.damage.observe(viewLifecycleOwner,  {damage ->
             damage?.let {
                 if(it==0){
-                    Toast.makeText(context,"Maalesef Uzay Aracının Dayanıklılığı Tükendi. Yeni Uzay Aracı Oluşturup Tekrar Deneyiniz..",
+                    Toast.makeText(context,"Unfortunately, the Spaceship's Endurance is Depleted. Create a New Spacecraft and Try Again..",
                         Toast.LENGTH_LONG).show()
                     val action = SpacePortDirections.actionSpacePortToSpaceShipCreate()
                     findNavController(fragment.requireView()).navigate(action)

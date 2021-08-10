@@ -1,4 +1,4 @@
-package com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.service
+package com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.db
 
 import android.content.Context
 import androidx.room.Database
@@ -8,7 +8,7 @@ import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.model.StationModel
 
 
 @Database(entities = arrayOf(StationModel::class),version = 1,exportSchema = false)
-abstract class StationDatabase : RoomDatabase(){
+abstract class  StationDatabase : RoomDatabase(){
 
     abstract fun stationDao (): StationDao
 
@@ -17,13 +17,13 @@ abstract class StationDatabase : RoomDatabase(){
         private val lock = Any()
 
         operator fun invoke(context: Context) = instance ?: synchronized(lock){
-            instance?: makeDatabese(context).also {
-                instance=it
+            instance ?: makeDatabese(context).also {
+                instance =it
             }
         }
 
         private fun makeDatabese(context : Context) = Room.databaseBuilder(context.applicationContext
-            ,StationDatabase::class.java,"stationdatabase").build()
+            , StationDatabase::class.java,"stationdatabase").build()
 
     }
 }

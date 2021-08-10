@@ -9,19 +9,24 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.R
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.databinding.FragmentSpaceShipCreateBinding
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.util.CustomSharedPreferences
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.viewmodel.SpaceShipCreateViewModel
+import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.viewmodel.SpaceStationsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_space_ship_create.*
 
+
+@AndroidEntryPoint
 class SpaceShipCreate : Fragment() {
 
 
     private lateinit var binding: FragmentSpaceShipCreateBinding
-    private lateinit var viewModel : SpaceShipCreateViewModel
+    private val viewModel : SpaceShipCreateViewModel by viewModels()
     private var customPreferences = CustomSharedPreferences()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +41,6 @@ class SpaceShipCreate : Fragment() {
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_space_ship_create, container, false)
         binding.lifecycleOwner=this
-        viewModel=ViewModelProvider(this).get(SpaceShipCreateViewModel::class.java)
         binding.stationShip=viewModel
 
         return binding.root
@@ -147,9 +151,9 @@ class SpaceShipCreate : Fragment() {
                 it.findNavController().navigate(action)
 
             }else if(viewModel.sub.value!=15){
-                Toast.makeText(context,"Dağıtılan Puan Toplamı 15 Olmalı !!! ",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,"Total Points Distributed Must Be 15 !!!",Toast.LENGTH_SHORT).show()
             }else{
-                Toast.makeText(context,"Lütfen Uzay Aracının İsmini Giriniz...",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,"Please Enter the Name of the Spaceship...",Toast.LENGTH_SHORT).show()
             }
         }
 

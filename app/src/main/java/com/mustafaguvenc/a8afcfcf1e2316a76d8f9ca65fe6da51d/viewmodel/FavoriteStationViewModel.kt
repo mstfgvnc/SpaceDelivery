@@ -3,10 +3,16 @@ package com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.viewmodel
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.model.StationModel
-import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.service.StationDatabase
+import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.db.StationDatabase
+import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.repository.Repository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class   FavoriteStationViewModel(application : Application): BaseViewModel(application){
+@HiltViewModel
+class FavoriteStationViewModel
+    @Inject constructor
+    (private val repository: Repository, application : Application): BaseViewModel(application){
 
     val favoriteStations = MutableLiveData<List<StationModel>>()
 
@@ -17,7 +23,7 @@ class   FavoriteStationViewModel(application : Application): BaseViewModel(appli
     private fun getDataFromSQLite(){
         launch {
 
-            val stations = StationDatabase(getApplication()).stationDao().getAllStations()
+            val stations = repository.getAllStations()
             val listFavorite = ArrayList<StationModel>()
             for(i in stations){
                 if(i.favoriteBool){

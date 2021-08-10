@@ -4,8 +4,8 @@ import android.app.Application
 import android.os.CountDownTimer
 import androidx.lifecycle.MutableLiveData
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.model.StationModel
-import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.service.StationApiService
-import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.service.StationDatabase
+import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.repository.Repository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
@@ -13,12 +13,12 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class SpaceStationsViewModel
-
-    (application : Application): BaseViewModel(application) {
+  @Inject constructor
+    (private val repository: Repository, application : Application): BaseViewModel(application) {
 
     val stations = MutableLiveData<List<StationModel>>()
-    private val stationApiService = StationApiService()
     private val disposable = CompositeDisposable()
     val loading = MutableLiveData<Boolean>()
     val error = MutableLiveData<Boolean>()
@@ -26,7 +26,7 @@ class SpaceStationsViewModel
     val eusValue =  MutableLiveData<Double>()
     val dsValue =  MutableLiveData<Int>()
     val damage =  MutableLiveData(100)
-    val currentStation =  MutableLiveData("Dünya")
+    val currentStation =  MutableLiveData("Earth")
     val shipName =  MutableLiveData<String>()
     val currentDamageTime = MutableLiveData<Int>()
     lateinit var timer : CountDownTimer
@@ -38,7 +38,7 @@ class SpaceStationsViewModel
     }
      private fun getDataFromSQLite(){
         launch {
-            val stations = StationDatabase(getApplication()).stationDao().getAllStations()
+            val stations = repository.getAllStations()
             if(stations.size==0){
                 getDataFromAPI()
             }else{
@@ -47,11 +47,12 @@ class SpaceStationsViewModel
 
         }
     }
-    private fun getDataFromAPI() {
+
+    private suspend fun getDataFromAPI() {
         loading.value=true
 
         disposable.add(
-            stationApiService.getData()
+            repository.getStations()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<List<StationModel>>() {
@@ -71,9 +72,10 @@ class SpaceStationsViewModel
 
     private fun storeInSQLite (list : List<StationModel>){
         launch {
-            val dao = StationDatabase(getApplication()).stationDao()
-            dao.deleteAllStations()
-            val listLong =  dao.insertAll(*list.toTypedArray())
+
+            repository.deleteAllStations()
+            val listLong =  repository.insertAll(*list.toTypedArray())
+
             var i = 0
             while(i<list.size){
                 list[i].uuid = listLong[i].toInt()
@@ -111,7 +113,6 @@ class SpaceStationsViewModel
 
             }
             override fun onFinish() {
-                    damage.value = 0
             }
         }
         timer.start()

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
@@ -12,22 +13,25 @@ import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.R
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.adapter.ViewPagerAdapter
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.viewmodel.FavoriteStationViewModel
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.viewmodel.SpaceStationsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_space_port.*
-
 
 class SpacePort : Fragment() {
 
-    private lateinit var pagerAdapter: ViewPagerAdapter
+
     private lateinit var viewModelSpaceStations : SpaceStationsViewModel
     private lateinit var viewModelFavoriteStations : FavoriteStationViewModel
+
+    private lateinit var pagerAdapter: ViewPagerAdapter
+
     var eusValue = 0
     var dsValue = 0
     var ugsValue = 0
     var shipName =""
 
     val tabArray = arrayOf(
-        "İstasyonlar",
-        "Favoriler"
+        "Stations",
+        "Favorites"
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

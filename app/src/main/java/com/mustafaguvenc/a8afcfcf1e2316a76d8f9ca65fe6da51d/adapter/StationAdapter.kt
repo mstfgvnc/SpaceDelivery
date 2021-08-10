@@ -19,21 +19,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.R
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.databinding.ItemStationListBinding
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.model.StationModel
-import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.service.StationDatabase
+import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.db.StationDatabase
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.view.*
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.viewmodel.SpaceStationsViewModel
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
-import javax.inject.Inject
 import kotlin.collections.ArrayList
 import kotlin.math.floor
 
-class StationAdapter
- //   @Inject constructor
-    (private val stationList: ArrayList<StationModel>,val fragment: Fragment):RecyclerView.Adapter<StationAdapter.StationViewHolder>() ,StationClickListener,Filterable{
+class StationAdapter (private val stationList: ArrayList<StationModel>,val fragment: Fragment)
+    :RecyclerView.Adapter<StationAdapter.StationViewHolder>() ,StationClickListener,Filterable{
 
     private var currentX = 0.0
     private var currentY = 0.0
@@ -154,19 +151,19 @@ class StationAdapter
 
 
                   if (visitedPositions.size == stationList.size) {
-                      Toast.makeText(context, "Tebrikler Görev Tamamlandı . Yeni Uzay Aracı Oluşturup Tekrar Deneyiniz..", Toast.LENGTH_LONG).show()
+                      Toast.makeText(context, "Congratulations Mission Completed. Create a New Spaceship and Try Again...", Toast.LENGTH_LONG).show()
                       val action = SpacePortDirections.actionSpacePortToSpaceShipCreate()
                       it.findNavController().navigate(action)
                   }else if(eusMin>viewModel.eusValue.value!! && ugsMin>viewModel.ugsValue.value!!){
-                      Toast.makeText(context,"Mevcut EUS ve UGS diğer istasyonlara gitmek için yeterli değil. Yeni Uzay Aracı Oluşturup Tekrar Deneyiniz..",Toast.LENGTH_LONG).show()
+                      Toast.makeText(context,"Current EUS and UGS are not enough to go to other stations. Create a New Spaceship and Try Again...",Toast.LENGTH_LONG).show()
                       val action = SpacePortDirections.actionSpacePortToSpaceShipCreate()
                       it.findNavController().navigate(action)
                   }else if(eusMin>viewModel.eusValue.value!!){
-                      Toast.makeText(context,"Mevcut EUS diğer istasyonlara gitmek için yeterli değil. Yeni Uzay Aracı Oluşturup Tekrar Deneyiniz..",Toast.LENGTH_LONG).show()
+                      Toast.makeText(context,"The current EUS is not enough to go to other stations. Create a New Spaceship and Try Again...",Toast.LENGTH_LONG).show()
                       val action = SpacePortDirections.actionSpacePortToSpaceShipCreate()
                       it.findNavController().navigate(action)
                   }else if(ugsMin>viewModel.ugsValue.value!!){
-                      Toast.makeText(context,"Mevcut UGS diğer istasyonların malzeme ihtiyaçları için yeterli değil. Yeni Uzay Aracı Oluşturup Tekrar Deneyiniz..",Toast.LENGTH_LONG).show()
+                      Toast.makeText(context,"The current UGS is not sufficient for the material needs of other stations. Create a New Spaceship and Try Again...",Toast.LENGTH_LONG).show()
                       val action = SpacePortDirections.actionSpacePortToSpaceShipCreate()
                       it.findNavController().navigate(action)
                   }

@@ -94,7 +94,7 @@
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_alignParentRight="true"
-            android:text="Start Again"
+            android:text="Restart"
             android:textSize="12dp"
             android:id="@+id/newSpaceship"
             >

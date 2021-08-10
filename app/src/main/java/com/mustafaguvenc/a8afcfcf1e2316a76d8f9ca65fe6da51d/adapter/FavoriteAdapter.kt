@@ -10,21 +10,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.R
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.databinding.ItemFavoriteListBinding
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.model.StationModel
-import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.service.StationDatabase
+import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.db.StationDatabase
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.viewmodel.FavoriteStationViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.DecimalFormat
-import javax.inject.Inject
-import javax.inject.Singleton
 
 
-class FavoriteAdapter
-   @Inject constructor
-        ( val favoriteList : ArrayList<StationModel>,  val fragment: Fragment)
-    :
-    RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
+class FavoriteAdapter ( val favoriteList : ArrayList<StationModel>,  val fragment: Fragment)
+    : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
     private lateinit var viewModel: FavoriteStationViewModel
 
     class FavoriteViewHolder(var view :ItemFavoriteListBinding) : RecyclerView.ViewHolder(view.root) {

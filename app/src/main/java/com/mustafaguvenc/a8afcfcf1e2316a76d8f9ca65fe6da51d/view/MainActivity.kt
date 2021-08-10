@@ -3,12 +3,9 @@ package com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.R
-import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.service.StationDao
-import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.util.CustomSharedPreferences
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
- @AndroidEntryPoint
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 /*
     @Inject
