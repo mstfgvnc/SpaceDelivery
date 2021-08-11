@@ -4,23 +4,21 @@ Aim; To transport the space suits needed by the stations to the warehouses by tr
 
 ## Build With
 
-* Kotlin
-* MVVM
-* Room
-* Navigation
-* Fragments
-* Data Binding
-* Retrofit
-* Coroutines
-* RxJava
-* LiveData
-* Shared Preferences
-* Hilt
-* ViewPager2
-* RecyclerView
-* SerachView
-
-Used Technologies: **Android, Kotlin, MVVM, Room, Navigation, Fragments, Data Binding, Retrofit, RxJava, LiveData, Shared Preferences, Dagger-Hilt, ViewPager2, RecyclerView, SearchView**
+* **Kotlin**
+* **MVVM**
+* **Room**
+* **Navigation**
+* **Fragments**
+* **Data Binding**
+* **Retrofit**
+* **Coroutines**
+* **RxJava**
+* **LiveData**
+* **Shared Preferences**
+* **Hilt**
+* **ViewPager2**
+* **RecyclerView**
+* **SerachView**
 
 
 
