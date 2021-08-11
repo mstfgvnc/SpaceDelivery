@@ -2,7 +2,26 @@
 
 Aim; To transport the space suits needed by the stations to the warehouses by traveling between stations on different planets.
 
+## Build With
+
+* Kotlin
+* MVVM
+* Room
+* Navigation
+* Fragments
+* Data Binding
+* Retrofit
+* Coroutines
+* RxJava
+* LiveData
+* Shared Preferences
+* Hilt
+* ViewPager2
+* RecyclerView
+* SerachView
+
 Used Technologies: **Android, Kotlin, MVVM, Room, Navigation, Fragments, Data Binding, Retrofit, RxJava, LiveData, Shared Preferences, Dagger-Hilt, ViewPager2, RecyclerView, SearchView**
+
 
 
  ![enter image description here](https://github.com/mstfgvnc/SpaceDelivery/blob/master/app/src/main/assets/ss1.jpg?raw=true)  ![enter image description here](https://github.com/mstfgvnc/SpaceDelivery/blob/master/app/src/main/assets/ss2.jpg?raw=true) ![enter image description here](https://github.com/mstfgvnc/SpaceDelivery/blob/master/app/src/main/assets/ss3.jpg?raw=true)
