@@ -26,7 +26,7 @@ Aim; To transport the space suits needed by the stations to the warehouses by tr
 
 ## Architecture
 
-![enter image description here](https://github.com/mstfgvnc/SpaceDelivery/blob/master/app/src/main/assets/ss3.jpg?raw=true)
+![enter image description here](https://github.com/mstfgvnc/SpaceDelivery/blob/master/app/src/main/assets/arch.png?raw=true)
 
 
 
