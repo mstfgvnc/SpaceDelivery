@@ -4,8 +4,7 @@ Aim; To transport the space suits needed by the stations to the warehouses by tr
 
 ## Build With
 
-**Kotlin** **MVVM** **Room** **Navigation** **Fragments** **Data Binding** **Retrofit** **Coroutines** **RxJava** **LiveData** **Shared Preferences** **Hilt** **ViewPager2**
-**RecyclerView** **SerachView**
+
 
 * **Kotlin**
 * **MVVM**
