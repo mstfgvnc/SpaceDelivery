@@ -10,16 +10,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.R
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.databinding.ItemFavoriteListBinding
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.model.StationModel
-import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.db.StationDatabase
+import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.repository.Repository
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.viewmodel.FavoriteStationViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.text.DecimalFormat
+import javax.inject.Inject
 
 
-class FavoriteAdapter ( val favoriteList : ArrayList<StationModel>,  val fragment: Fragment)
+
+class FavoriteAdapter @Inject constructor (val favoriteList : ArrayList<StationModel>,
+                                           val fragment: Fragment,
+                                           private val repository: Repository)
     : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
+
     private lateinit var viewModel: FavoriteStationViewModel
 
     class FavoriteViewHolder(var view :ItemFavoriteListBinding) : RecyclerView.ViewHolder(view.root) {
@@ -38,10 +42,13 @@ class FavoriteAdapter ( val favoriteList : ArrayList<StationModel>,  val fragmen
     override fun onBindViewHolder(holder : FavoriteViewHolder, position : Int) {
 
         holder.view.stationFv = favoriteList[position]
-        holder.view.eusForFavorite.text="Uzaklık: "+"\n" +DecimalFormat("##.##").format(distanceCalculate(favoriteList[position].coordinateX!!,favoriteList[position].coordinateY!!)).toString()+" EUS"
+
+        //İstasyonların dünyaya olan uzaklığının hesaplanması
         favoriteList[position].nowEusToEarth=Math.round(distanceCalculate(favoriteList[position].coordinateX!!,favoriteList[position].coordinateY!!)*100)/100.00
+
         holder.view.favoriteInButtonFv.setOnClickListener {
 
+            // Favorilerden istasyonun çıkarılması ve listenin güncellenmesi
             updateStation(favoriteList.get(position).uuid,favoriteList.get(position))
             favoriteList.removeAt(position)
             val listFavorite = ArrayList<StationModel>(favoriteList)
@@ -51,7 +58,9 @@ class FavoriteAdapter ( val favoriteList : ArrayList<StationModel>,  val fragmen
 
     }
 
+    // Favoriden çıkarılan istasyonun room da güncellenmesi
     private fun updateStation(position: Int,stationModel: StationModel) {
+
         viewModel=ViewModelProvider(fragment).get(FavoriteStationViewModel::class.java)
         viewModel.launch {
 
@@ -60,11 +69,12 @@ class FavoriteAdapter ( val favoriteList : ArrayList<StationModel>,  val fragmen
             editedItem.favoriteBool=false
 
             withContext(Dispatchers.IO) {
-                StationDatabase(context).stationDao().update(editedItem)
+                repository.update(editedItem)
             }
-
-
         }
+
+
+
     }
 
     override fun getItemCount() : Int {
@@ -82,4 +92,6 @@ class FavoriteAdapter ( val favoriteList : ArrayList<StationModel>,  val fragmen
         val distance = (x*x) + (y*y)
         return Math.sqrt(distance)
     }
+
+
 }

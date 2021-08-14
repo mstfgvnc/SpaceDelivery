@@ -38,8 +38,6 @@ class StationAdapter (private val stationList: ArrayList<StationModel>,val fragm
     var stationFilterList = ArrayList<StationModel>()
     var stationFilterListFull = ArrayList<StationModel>()
     private lateinit var viewModel : SpaceStationsViewModel
-  // @Inject
-  //  lateinit var viewModel : SpaceStationsViewModel
 
     init {
         stationFilterList=stationList
@@ -62,6 +60,8 @@ class StationAdapter (private val stationList: ArrayList<StationModel>,val fragm
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder : StationViewHolder, position : Int) {
+
+        //filtreleme yapıldığında gerçek pozisyon ile listedeki pozisyon değişebiliyor. gerçek pozisyonu tutmak için kurulan döngü
         var realPosition = position
         for(i in 0 until stationList.size-1){
             if(stationFilterList[position].name.equals(stationList[i].name)){
@@ -71,6 +71,8 @@ class StationAdapter (private val stationList: ArrayList<StationModel>,val fragm
 
         holder.view.station= stationFilterList[position]
         holder.view.listener= this
+
+        //İstasyonların mevcut konuma olan uzaklığının hesaplanması
         val eusSpaceship=Math.round(distanceCalculate(stationFilterList[position].coordinateX!!,stationFilterList[position].coordinateY!!)*100)/100.00
         stationFilterList[position].nowEus= eusSpaceship
 

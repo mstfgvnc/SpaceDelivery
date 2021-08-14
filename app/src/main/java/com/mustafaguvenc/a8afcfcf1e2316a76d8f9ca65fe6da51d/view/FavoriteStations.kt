@@ -12,17 +12,17 @@ import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.R
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.adapter.FavoriteAdapter
 import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.viewmodel.FavoriteStationViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mustafaguvenc.a8afcfcf1e2316a76d8f9ca65fe6da51d.viewmodel.SpaceStationsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_favorite_stations.*
 import javax.inject.Inject
-import javax.inject.Singleton
 
 @AndroidEntryPoint
 class FavoriteStations : Fragment() {
 
-   private val viewModel : FavoriteStationViewModel by viewModels()
-   private  val favoriteAdapter = FavoriteAdapter(arrayListOf(),this)
+     val viewModel : FavoriteStationViewModel by viewModels()
+
+    @Inject
+    lateinit var favoriteAdapter: FavoriteAdapter
 
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +48,7 @@ class FavoriteStations : Fragment() {
     }
 
     fun observeLiveData(){
-        viewModel.favoriteStations.observe(viewLifecycleOwner, Observer { stations ->
+        viewModel.favoriteStations.observe(viewLifecycleOwner,  { stations ->
             stations?.let{
                 favoriteList.visibility = View.VISIBLE
                 favoriteAdapter.updateFavoriteList(stations)

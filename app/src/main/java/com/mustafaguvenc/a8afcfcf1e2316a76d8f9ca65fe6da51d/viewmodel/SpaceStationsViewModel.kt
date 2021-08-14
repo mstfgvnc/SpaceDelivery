@@ -38,6 +38,7 @@ class SpaceStationsViewModel
     }
      private fun getDataFromSQLite(){
         launch {
+            loading.value=true
             val stations = repository.getAllStations()
             if(stations.size==0){
                 getDataFromAPI()
@@ -49,7 +50,6 @@ class SpaceStationsViewModel
     }
 
     private suspend fun getDataFromAPI() {
-        loading.value=true
 
         disposable.add(
             repository.getStations()
@@ -86,7 +86,6 @@ class SpaceStationsViewModel
 
     }
     private fun showView(turbinList : List<StationModel>){
-
         stations.value= turbinList
         loading.value=false
         error.value=false
